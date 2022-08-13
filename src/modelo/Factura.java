@@ -2,12 +2,15 @@ package modelo;
 
 /**
  * Un objeto `Factura` tiene un `codigo`, un objeto `Cliente`, un objeto `Camara` y un objeto `Fecha`
+ * @author Nicolás Olmos
+ * @author Daniel Garcia
  */
 public class Factura {
     private String codigo;
     private Cliente objCli;
     private Camara objCam;
     private Fecha objFCom;
+
     /**
      * Constructor basico que realiza una instancia de Factura con valores nulos
      * */
