@@ -8,17 +8,33 @@ import java.sql.Statement;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
+/**
+ * Esta clase se utiliza para conectarse a la base de datos y realizar operaciones CRUD en la tabla Camaras.
+ * @author Nicolás Olmos
+ * @author Daniel Garcia
+ */
 public class CamaraDAO {
     private Camara objC;
 
+    /**
+     * Un constructor que recibe un objeto Camara como parámetro.
+     */
     public CamaraDAO(Camara objC) {
         this.objC = objC;
     }
 
+    /**
+     * Un constructor que inicializa el objeto `objC` a `null`.
+     */
     public CamaraDAO() {
         this.objC = null;
     }
 
+    /**
+     * Se conecta a la base de datos, ejecuta una consulta y devuelve el resultado en un modelo de tabla
+     *
+     * @return Un modelo de mesa.
+     */
     public DefaultTableModel consultar() {
         DefaultTableModel plantilla = new DefaultTableModel();
         ConexionBD con = new ConexionBD();
@@ -50,7 +66,8 @@ public class CamaraDAO {
         return plantilla;
     }
 
-    /*public String insertar() {
+    /*
+    public String insertar() {
         String mensaje = "";
         try {
             ConexionBD conexion = new ConexionBD();
@@ -91,10 +108,21 @@ public class CamaraDAO {
         return mensaje;
     }*/
 
+    /**
+     * Esta función devuelve el objeto de la clase Camara
+     *
+     * @return El objeto objC.
+     */
     public Camara getObjC() {
         return objC;
     }
 
+    /**
+     * La función setObjC() es una función pública que toma un objeto Camara como parámetro y establece la variable objC en
+     * el parámetro
+     *
+     * @param objC Este es el objeto de la clase Camara.
+     */
     public void setObjC(Camara objC) {
         this.objC = objC;
     }
