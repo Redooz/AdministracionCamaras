@@ -8,17 +8,35 @@ import java.sql.Statement;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
+/**
+ * Esta clase se utiliza para conectarse a la base de datos y realizar operaciones CRUD en la tabla Clientes.
+ * @author Nicolás Olmos
+ * @author Daniel Garcia
+ */
 public class ClienteDAO {
     private Cliente objC;
 
+    /**
+     * Un constructor que recibe un objeto Cliente como parámetro.
+     */
     public ClienteDAO(Cliente objC) {
         this.objC = objC;
     }
 
+    /**
+     * Un constructor que inicializa el objeto `objC`.
+     */
     public ClienteDAO() {
         this.objC = new Cliente();
     }
 
+    /**
+     * Se conecta a la base de datos, ejecuta una consulta, obtiene los metadatos del conjunto de resultados, crea un
+     * modelo de tabla, agrega las columnas al modelo de tabla, agrega las filas al modelo de tabla, cierra el conjunto de
+     * resultados y la conexión, y devuelve el modelo de la tabla
+     *
+     * @return Un modelo de tabla.
+     */
     public DefaultTableModel consultar() {
         DefaultTableModel plantilla = new DefaultTableModel();
         ConexionBD con = new ConexionBD();
@@ -91,10 +109,21 @@ public class ClienteDAO {
         return mensaje;
     }*/
 
+    /**
+     * Esta función devuelve el objeto de la clase Cliente
+     *
+     * @return El objeto objC.
+     */
     public Cliente getObjC() {
         return objC;
     }
 
+    /**
+     * La función setObjC() es una función pública que toma un objeto Cliente como parámetro y establece la variable objC
+     * en el parámetro
+     *
+     * @param objC Este es el objeto que se utilizará para almacenar los datos que se recuperarán de la base de datos.
+     */
     public void setObjC(Cliente objC) {
         this.objC = objC;
     }
