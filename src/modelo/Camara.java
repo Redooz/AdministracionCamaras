@@ -1,23 +1,50 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package modelo;
 
 /**
- *
- * @author UD
+ * Clase abstracta que representa camara, tiene como atributos 
+ * id (String), marca (String), lente (String) y precio (Double)
+ * @author Nicolás Olmos
+ * @author Daniel Garcia
  */
 public abstract class Camara {
-    protected String id, marca, lente;
+
+    /**
+     * Representacion del id de una camara.
+     */
+    protected String id,
+
+    /**
+     * Representacion de la marca de una camara.
+     */
+    marca,
+
+    /**
+     * Representacion del lente de una camara.
+     */
+    lente;
+
+    /**
+     * Representacion del precio de una camara.
+     */
     protected double precio;
     
+    /**
+     * Constructor basico, crea una instancia de Camara con sus atributos nulos
+     */
     public Camara() {
         this.id = "";
         this.marca = "";
         this.lente = "";
         this.precio =0;
     }
+
+    /**
+     * Constructor parametrico, crea una instancia de Camara en base a los siguientes parametros
+     * @param id
+     * @param marca
+     * @param lente
+     * @param precio
+     */
     public Camara(String id, String marca, String lente, double precio) {
         this.id = id;
         this.marca = marca;
@@ -25,36 +52,72 @@ public abstract class Camara {
         this.precio = precio;
     }
     
+    /**
+     * Metodo abstracto que calcula el descuento que tiene cada camara
+     * @return
+     */
     public abstract double descuento();
     
+    /**
+     * Getter que retorna el valor de ID
+     * @return
+     */
     public String getId() {
         return id;
     }
 
+    /**
+     * Setter que modifica el valor de ID
+     * @param id
+     */
     public void setId(String id) {
         this.id = id;
     }
 
+    /**
+     * Getter que retorna el valor de marca
+     * @return
+     */
     public String getMarca() {
         return marca;
     }
 
+    /**
+     * Setter que modifica el valor de marca
+     * @param marca
+     */
     public void setMarca(String marca) {
         this.marca = marca;
     }
 
+    /**
+     * Getter que retorna el valor de lente
+     * @return String
+     */
     public String getLente() {
         return lente;
     }
 
+    /**
+     * Setter que modifica el valor de lente
+     * @param lente
+     */
     public void setLente(String lente) {
         this.lente = lente;
     }
 
+    /**
+     * Getter que retorna el valor de precio
+     * @return double
+     */
     public double getPrecio() {
         return precio;
     }
 
+    /**
+     * Setter que modifica el valor de precio
+     * @param precio
+     */
     public void setPrecio(double precio) {
         this.precio = precio;
     }
@@ -63,6 +126,11 @@ public abstract class Camara {
     public String toString() {
         return "ID: " + id + " Marca: " + marca + " Lente: " + lente + " Precio: "+precio;
     }
+
+    /**
+     * Metodo que retorna los atributos de Camara en formato CSVgit 
+     * @return
+     */
     public String datos(){
         return id + ";" + marca + ";" + lente + ";" + precio;
     }
