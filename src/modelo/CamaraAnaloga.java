@@ -1,7 +1,7 @@
 package modelo;
 
 /**
- * Clase abstracta que representa una camara analoga, tiene como atributos 
+ * Clase que representa una camara analoga, tiene como atributos 
  * id (String), marca (String), lente (String), precio (Double), rollo (String)
  * y visor (String)
  * @author Nicolás Olmos
