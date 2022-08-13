@@ -18,13 +18,23 @@ public class Conexion {
     private FileWriter flujoEscr;
     private PrintWriter bufSalida;
 
+    /**
+     * Es un constructor parametrico que instancia a ConexionBD con los siguientes parametros.
+     * @param bufEntrada
+     * @param flujoLee
+     * @param flujoEscr
+     * @param bufSalida
+     */
     public Conexion(BufferedReader bufEntrada, FileReader flujoLee, FileWriter flujoEscr, PrintWriter bufSalida) {
         this.bufEntrada = bufEntrada;
         this.flujoLee = flujoLee;
         this.flujoEscr = flujoEscr;
         this.bufSalida = bufSalida;
     }
-    
+
+    /**
+     * Es un constructor basico que instancia a Conexion con valores nulos.
+     */
     public Conexion() {
         this.bufEntrada = null;
         this.flujoLee = null;
