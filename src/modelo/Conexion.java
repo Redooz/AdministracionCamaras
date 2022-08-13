@@ -19,7 +19,7 @@ public class Conexion {
     private PrintWriter bufSalida;
 
     /**
-     * Es un constructor parametrico que instancia a ConexionBD con los siguientes parametros.
+     * Es un constructor parametrico que instancia a Conexion con los siguientes parametros.
      * @param bufEntrada
      * @param flujoLee
      * @param flujoEscr
