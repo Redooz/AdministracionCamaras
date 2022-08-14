@@ -122,6 +122,34 @@ public class ClienteDAO {
     }
     
     /**
+     * Metodo eliminar el cual esta encargado de la tarea de eliminar los datos de la base de datos, comprandolos con la fila seleccionada
+     * y que retorna un String con la confirmacion de la eliminacion
+     * @return String
+     */
+    public String eliminar(){
+        String mensaje = "";
+        try {
+            ConexionBD conexion = new ConexionBD();
+            PreparedStatement consulta = null;
+            conexion.conectar();
+            String comando = "delete from clientes"
+                            + " where id='"+objC.getCedula()+"'";
+            consulta = conexion.getConexion().prepareStatement(comando);
+            consulta.execute();
+            
+            if(consulta != null){
+                mensaje = "Eliminación exitosa...";
+            }
+            
+            consulta.close();
+            conexion.getConexion().close();
+        } catch (SQLException ex) {
+            mensaje = "Error al intentar eliminar...\n" + ex;
+        }
+        return mensaje;
+    }
+    
+    /**
      * Esta función devuelve el objeto de la clase Cliente
      *
      * @return El objeto objC.
