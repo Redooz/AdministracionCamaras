@@ -134,6 +134,7 @@ public class Controlador implements ActionListener, Runnable{
 
             if (resp == JOptionPane.YES_OPTION) {
                 frmE.dispose();
+                hilo.stop();
             }
         }
 
@@ -151,6 +152,9 @@ public class Controlador implements ActionListener, Runnable{
                 objCli.setCedula(frmR.getTxtCedula().getText());
                 objCli.setNom(frmR.getTxtNombre().getText());
                 objCli.setTel(frmR.getTxtTel().getText());
+                
+                clienteDAO.setObjC(objCli);
+                JOptionPane.showMessageDialog(frmR, clienteDAO.insertar());
                 
                 objF.setObjCli(objCli);
                 
