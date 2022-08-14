@@ -70,16 +70,25 @@ public class FacturaDAO {
         return plantilla;
     }
 
-    /*public String insertar() {
+    /**
+     * Metodo Insertar el cual esta encargado de insertar los datos de la clase factura a la base de datos 
+     * y que retorna un String con la confirmacion de la insercion
+     * @return String
+     */
+    public String insertar() {
         String mensaje = "";
         try {
             ConexionBD conexion = new ConexionBD();
-            Statement consulta = null;
+            PreparedStatement consulta = null;
             conexion.conectar();
-            String comando = "insert into productos values('" + objF.getCodigo()
-                    + "','" + objF.getNombre()+ "'," + objF.getPrecio()+ "," + objF.getCantidad() +")";
-            consulta = conexion.getConexion().createStatement();
-            consulta.execute(comando);
+            String comando = "insert into facturas values(?,?,?,?,?)";
+            consulta = conexion.getConexion().prepareStatement(comando);
+            consulta.setString(1, objF.getCodigo());
+            consulta.setString(2, objF.getObjFCom().toString());
+            consulta.setString(3, objF.getObjCli().getCedula());
+            consulta.setString(4, objF.getObjCam().getId());
+            consulta.setDouble(5, objF.precioTotal());
+            consulta.execute();
             mensaje = "Registro exitoso...";
             consulta.close();
             conexion.getConexion().close();
@@ -89,28 +98,63 @@ public class FacturaDAO {
         return mensaje;
     }
 
-    public String insertar2() {
+    /**
+     * Metodo actualizar el cual esta encargado de la tarea de actualizar los datos de la base de datos, comparandolos con los datos de la tabla facturas
+     * y que retorna un String con la confirmacion de la actualizacion
+     * @return String
+     */
+    public String actualizar(){
         String mensaje = "";
         try {
             ConexionBD conexion = new ConexionBD();
             PreparedStatement consulta = null;
             conexion.conectar();
-            String comando = "insert into productos values(?,?,?)";
+            String comando = "update facturas set codigo=?,fecha=?,id_cliente=?,id_camara=?,precio_total=?"
+                            + " where codigo='"+objF.getCodigo()+"'";
             consulta = conexion.getConexion().prepareStatement(comando);
             consulta.setString(1, objF.getCodigo());
-            consulta.setString(2, objF.getNombre());
-            consulta.setDouble(3, objF.getPrecio());
-            consulta.setInt(4, objF.getCantidad());
+            consulta.setString(2, objF.getObjFCom().toString());
+            consulta.setString(3, objF.getObjCli().getCedula());
+            consulta.setString(4, objF.getObjCam().getId());
+            consulta.setDouble(5, objF.precioTotal());
             consulta.execute();
-            mensaje = "Registro exitoso...";
+            mensaje = "Actualizacion exitosa...";
             consulta.close();
             conexion.getConexion().close();
         } catch (SQLException ex) {
-            mensaje = "Error al intentar insertar...\n" + ex;
+            mensaje = "Error al intentar actualizar...\n" + ex;
         }
         return mensaje;
-    }*/
-
+    }
+    
+    /**
+     * Metodo eliminar el cual esta encargado de la tarea de eliminar los datos de la base de datos, comprandolos con la fila seleccionada
+     * y que retorna un String con la confirmacion de la eliminacion
+     * @return String
+     */
+    public String eliminar(){
+        String mensaje = "";
+        try {
+            ConexionBD conexion = new ConexionBD();
+            PreparedStatement consulta = null;
+            conexion.conectar();
+            String comando = "delete from facturas"
+                            + " where codigo='"+objF.getCodigo()+"'";
+            consulta = conexion.getConexion().prepareStatement(comando);
+            consulta.execute();
+            
+            if(consulta != null){
+                mensaje = "Eliminación exitosa...";
+            }
+            
+            consulta.close();
+            conexion.getConexion().close();
+        } catch (SQLException ex) {
+            mensaje = "Error al intentar eliminar...\n" + ex;
+        }
+        return mensaje;
+    }
+    
     /**
      * Esta función devuelve el valor de la variable objF
      *

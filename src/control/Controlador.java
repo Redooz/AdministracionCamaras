@@ -154,7 +154,7 @@ public class Controlador implements ActionListener, Runnable{
                 objCli.setTel(frmR.getTxtTel().getText());
                 
                 clienteDAO.setObjC(objCli);
-                JOptionPane.showMessageDialog(frmR, clienteDAO.insertar());
+                JOptionPane.showMessageDialog(frmR, "Cliente: "+clienteDAO.insertar());
                 
                 objF.setObjCli(objCli);
                 
@@ -172,9 +172,12 @@ public class Controlador implements ActionListener, Runnable{
 
                         objF.setObjCam(objCD);
                         objLF.getArrayFac().add(objF);
-
+                        
                         camaraDAO.setObjC(objCD);
-                        JOptionPane.showMessageDialog(frmR, camaraDAO.insertar());
+                        JOptionPane.showMessageDialog(frmR, "Camara Digital: "+camaraDAO.insertar());
+                        
+                        facturaDAO.setObjF(objF);
+                        JOptionPane.showMessageDialog(frmR, facturaDAO.insertar());
                         
                         objCon.escribeDatos(objF.datos());
                         break;
@@ -192,7 +195,10 @@ public class Controlador implements ActionListener, Runnable{
                         objLF.getArrayFac().add(objF);
 
                         camaraDAO.setObjC(objCA);
-                        JOptionPane.showMessageDialog(frmR, camaraDAO.insertar());
+                        JOptionPane.showMessageDialog(frmR, "Camara Analoga: "+camaraDAO.insertar());
+                        
+                        facturaDAO.setObjF(objF);
+                        JOptionPane.showMessageDialog(frmR, "Factura "+facturaDAO.insertar());
                         
                         objCon.escribeDatos(objF.datos());
                         break;
