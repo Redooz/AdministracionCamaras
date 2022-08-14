@@ -24,7 +24,7 @@ import vista.frmConsultarBD;
 import vista.frmRegistrar;
 
 /*
-* @author SnakyDH
+* @author Nicolas Olmos y Daniel Garcia
  */
 public class Controlador implements ActionListener, Runnable{
 
@@ -74,20 +74,23 @@ public class Controlador implements ActionListener, Runnable{
     }
 
     @Override
-    public void run() {
-        while (true) {            
+public void run() {
+        while (true) {
             try {
+                // Inicializar el reloj
                 objH.incrementoSS();
                 frmE.getLblHora().setText(objH.toString());
+                // Evaluamos si el valor de los segundo es igual a 0 (Lo cual implica que hubo un avance en el segundero), se aumentara los Minutos
+                if (objH.getSs() == 0) {
+                    objH.incrementoMM();
+                    frmE.getLblHora().setText(objH.toString());
+                }
+                // Evaluamos si el valor de los minutos es igual a 0 (Lo cual implica que hubo un avance en el minutero), se aumentara las horas
+                if (objH.getMm() == 0) {
+                    objH.incrementoHH();
+                    frmE.getLblHora().setText(objH.toString());
+                }
                 hilo.sleep(1000);
-                
-                objH.incrementoMM();
-                frmE.getLblHora().setText(objH.toString());
-                
-                objH.incrementoHH();
-                frmE.getLblHora().setText(objH.toString());
-                
-                
             } catch (InterruptedException ex) {
                 JOptionPane.showMessageDialog(frmE, ex.getMessage());
             }
