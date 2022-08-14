@@ -33,7 +33,7 @@ public class CamaraDAO {
     /**
      * Se conecta a la base de datos, ejecuta una consulta y devuelve el resultado en un modelo de tabla
      *
-     * @return Un modelo de mesa.
+     * @return Un modelo de tabla.
      */
     public DefaultTableModel consultar() {
         DefaultTableModel plantilla = new DefaultTableModel();
@@ -66,38 +66,38 @@ public class CamaraDAO {
         return plantilla;
     }
 
-    /*
+    /**
+     * Se conecta a la base de datos, ejecuta un insert en camaras y devuelve el resultado en un String
+     *
+     * @return String
+     */
     public String insertar() {
-        String mensaje = "";
-        try {
-            ConexionBD conexion = new ConexionBD();
-            Statement consulta = null;
-            conexion.conectar();
-            String comando = "insert into productos values('" + objF.getCodigo()
-                    + "','" + objF.getNombre()+ "'," + objF.getPrecio()+ "," + objF.getCantidad() +")";
-            consulta = conexion.getConexion().createStatement();
-            consulta.execute(comando);
-            mensaje = "Registro exitoso...";
-            consulta.close();
-            conexion.getConexion().close();
-        } catch (SQLException ex) {
-            mensaje = "Error al intentar insertar...\n" + ex;
-        }
-        return mensaje;
-    }
-
-    public String insertar2() {
         String mensaje = "";
         try {
             ConexionBD conexion = new ConexionBD();
             PreparedStatement consulta = null;
             conexion.conectar();
-            String comando = "insert into productos values(?,?,?)";
+            String comando = "insert into camaras values(?,?,?,?,?,?,?,?)";
             consulta = conexion.getConexion().prepareStatement(comando);
-            consulta.setString(1, objF.getCodigo());
-            consulta.setString(2, objF.getNombre());
-            consulta.setDouble(3, objF.getPrecio());
-            consulta.setInt(4, objF.getCantidad());
+            consulta.setString(1, objC.getId());
+            consulta.setString(2, objC.getMarca());
+            consulta.setString(3, objC.getLente());
+            consulta.setDouble(4, objC.getPrecio());
+            
+            if(objC instanceof CamaraAnaloga){
+                CamaraAnaloga objCA = (CamaraAnaloga) objC;
+                consulta.setString(5, objCA.getRollo());
+                consulta.setString(6, objCA.getVisor());
+                consulta.setString(7, null);
+                consulta.setString(8, null);
+            } else if(objC instanceof CamaraDigital){
+                CamaraDigital objCD = (CamaraDigital) objC;
+                consulta.setString(5, null);
+                consulta.setString(6, null);
+                consulta.setString(7, objCD.getMemoria());
+                consulta.setString(8, objCD.getPantalla());
+            }
+            
             consulta.execute();
             mensaje = "Registro exitoso...";
             consulta.close();
@@ -106,7 +106,7 @@ public class CamaraDAO {
             mensaje = "Error al intentar insertar...\n" + ex;
         }
         return mensaje;
-    }*/
+    }
 
     /**
      * Esta función devuelve el objeto de la clase Camara

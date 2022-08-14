@@ -169,6 +169,9 @@ public class Controlador implements ActionListener, Runnable{
                         objF.setObjCam(objCD);
                         objLF.getArrayFac().add(objF);
 
+                        camaraDAO.setObjC(objCD);
+                        JOptionPane.showMessageDialog(frmR, camaraDAO.insertar());
+                        
                         objCon.escribeDatos(objF.datos());
                         break;
                     case 1://Camara analoga
@@ -184,6 +187,9 @@ public class Controlador implements ActionListener, Runnable{
                         objF.setObjCam(objCA);
                         objLF.getArrayFac().add(objF);
 
+                        camaraDAO.setObjC(objCA);
+                        JOptionPane.showMessageDialog(frmR, camaraDAO.insertar());
+                        
                         objCon.escribeDatos(objF.datos());
                         break;
                 }
