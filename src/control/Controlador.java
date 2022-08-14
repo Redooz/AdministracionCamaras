@@ -246,6 +246,8 @@ public class Controlador implements ActionListener, Runnable{
                     JOptionPane.showMessageDialog(frmCBD, camaraDAO.actualizar());
                     break;
                 case 2: //Clientes
+                    enviarDatosTablaClientes();
+                    JOptionPane.showMessageDialog(frmCBD, clienteDAO.actualizar());
                     break;
             }
         }
@@ -355,6 +357,22 @@ public class Controlador implements ActionListener, Runnable{
         
     }
     
+    public void enviarDatosTablaClientes(){
+        JTable tabla = frmCBD.getTblClientes();
+        int fila = tabla.getSelectedRow();
+        
+        Cliente objC = new Cliente(
+                tabla.getValueAt(fila, 0).toString(),
+                tabla.getValueAt(fila, 1).toString(),
+                tabla.getValueAt(fila, 2).toString());
+        
+        clienteDAO.setObjC(objC);
+    }
+    
+    /**
+     * Metodo el cual borra la fila de la tabla que fue seleccionada por el usuario
+     * @param tabla tabla en la cual se desea eliminar una fila
+     */
     public void borrarFila(JTable tabla){
         DefaultTableModel plantilla = (DefaultTableModel) tabla.getModel();
         int fila = tabla.getSelectedRow();

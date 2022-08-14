@@ -95,6 +95,33 @@ public class ClienteDAO {
     }
 
     /**
+     * Metodo actualizar el cual esta encargado de la tarea de actualizar los datos de la base de datos, comparandolos con los datos de la tabla clientes
+     * y que retorna un String con la confirmacion de la actualizacion
+     * @return String
+     */
+    public String actualizar(){
+        String mensaje = "";
+        try {
+            ConexionBD conexion = new ConexionBD();
+            PreparedStatement consulta = null;
+            conexion.conectar();
+            String comando = "update clientes set id=?,nombre=?,telefono=?"
+                            + " where id='"+objC.getCedula()+"'";
+            consulta = conexion.getConexion().prepareStatement(comando);
+            consulta.setString(1, objC.getCedula());
+            consulta.setString(2, objC.getNom());
+            consulta.setString(3, objC.getTel());
+            consulta.execute();
+            mensaje = "Actualizacion exitosa...";
+            consulta.close();
+            conexion.getConexion().close();
+        } catch (SQLException ex) {
+            mensaje = "Error al intentar actualizar...\n" + ex;
+        }
+        return mensaje;
+    }
+    
+    /**
      * Esta función devuelve el objeto de la clase Cliente
      *
      * @return El objeto objC.
