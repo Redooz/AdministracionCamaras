@@ -107,6 +107,43 @@ public class CamaraDAO {
         }
         return mensaje;
     }
+    
+    public String actualizar(){
+        String mensaje = "";
+        try {
+            ConexionBD conexion = new ConexionBD();
+            PreparedStatement consulta = null;
+            conexion.conectar();
+            String comando = "update camaras set id=?,marca=?,lente=?,precio=?,rollo=?,visor=?,memoria=?,pantalla=?"
+                            + " where id='"+objC.getId()+"'";
+            consulta = conexion.getConexion().prepareStatement(comando);
+            consulta.setString(1, objC.getId());
+            consulta.setString(2, objC.getMarca());
+            consulta.setString(3, objC.getLente());
+            consulta.setDouble(4, objC.getPrecio());
+            
+            if(objC instanceof CamaraAnaloga){
+                CamaraAnaloga objCA = (CamaraAnaloga) objC;
+                consulta.setString(5, objCA.getRollo());
+                consulta.setString(6, objCA.getVisor());
+                consulta.setString(7, null);
+                consulta.setString(8, null);
+            } else if(objC instanceof CamaraDigital){
+                CamaraDigital objCD = (CamaraDigital) objC;
+                consulta.setString(5, null);
+                consulta.setString(6, null);
+                consulta.setString(7, objCD.getMemoria());
+                consulta.setString(8, objCD.getPantalla());
+            }
+            consulta.execute();
+            mensaje = "Actualizacion exitosa...";
+            consulta.close();
+            conexion.getConexion().close();
+        } catch (SQLException ex) {
+            mensaje = "Error al intentar actualizar...\n" + ex;
+        }
+        return mensaje;
+    }
 
     /**
      * Esta función devuelve el objeto de la clase Camara

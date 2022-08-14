@@ -223,11 +223,43 @@ public class Controlador implements ActionListener, Runnable{
             frmCBD.getTblCamaras().setModel(camaraDAO.consultar()); //Tabla camaras
             frmCBD.getTblClientes().setModel(clienteDAO.consultar()); //Tabla clientes
             
+            frmCBD.getBtnActualizar().addActionListener(this);
+            frmCBD.getBtnEliminar().addActionListener(this);
+            
+            
             calcularTotalFacturasBD();
             
             frmCBD.setVisible(true);
         }
         
+        if(e.getSource().equals(frmCBD.getBtnActualizar())){ //Boton actualizar
+            switch(frmCBD.getPanelTabs().getSelectedIndex()){ 
+                case 0: //Facturas
+                    
+                    break;
+                case 1: //Camaras
+                    enviarDatosTablaCamaras();
+                    JOptionPane.showMessageDialog(frmCBD, camaraDAO.actualizar());
+                    break;
+                case 2: //Clientes
+                    break;
+            }
+        }
+     
+        //TO DO
+        if(e.getSource().equals(frmCBD.getBtnEliminar())){ //Boton eliminar
+            switch(frmCBD.getPanelTabs().getSelectedIndex()){ 
+                case 0: //Facturas
+                    
+                    break;
+                case 1: //Camaras
+                    enviarDatosTablaCamaras();
+                    //JOptionPane.showMessageDialog(frmCBD, camaraDAO.eliminar());
+                    break;
+                case 2: //Clientes
+                    break;
+            }
+        }
     }
 
     public void agregarTabla() {
@@ -289,5 +321,39 @@ public class Controlador implements ActionListener, Runnable{
         }
         
         frmCBD.getLblTotal().setText(total.toString());
+    }
+    
+    public void enviarDatosTablaCamaras(){
+        JTable tabla = frmCBD.getTblCamaras();
+        int fila = tabla.getSelectedRow();
+        
+        if(tabla.getValueAt(fila, 4) == null && tabla.getValueAt(fila, 5) == null){ //Camara digital
+            CamaraDigital objCD = new CamaraDigital(tabla.getValueAt(fila, 6).toString(),
+                    tabla.getValueAt(fila, 7).toString(), 
+                    tabla.getValueAt(fila, 0).toString(), 
+                    tabla.getValueAt(fila, 1).toString(),
+                    tabla.getValueAt(fila, 2).toString(),
+                    Double.parseDouble(tabla.getValueAt(fila, 3).toString())); 
+            
+            camaraDAO.setObjC(objCD);
+        } else if(tabla.getValueAt(fila, 6) == null && tabla.getValueAt(fila, 7) == null){ //Camara analoga
+            CamaraAnaloga objCA = new CamaraAnaloga(
+                    tabla.getValueAt(fila, 4).toString(), 
+                    tabla.getValueAt(fila, 5).toString(), 
+                    tabla.getValueAt(fila, 0).toString(), 
+                    tabla.getValueAt(fila, 1).toString(), 
+                    tabla.getValueAt(fila, 2).toString(), 
+                    Double.parseDouble(tabla.getValueAt(fila, 3).toString()));
+            
+            camaraDAO.setObjC(objCA);
+        }
+        
+    }
+    
+    public void borrarFila(JTable tabla){
+        DefaultTableModel plantilla = (DefaultTableModel) tabla.getModel();
+        int fila = tabla.getSelectedRow();
+        
+        plantilla.removeRow(fila);
     }
 }
