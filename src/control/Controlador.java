@@ -254,7 +254,8 @@ public class Controlador implements ActionListener, Runnable{
                     break;
                 case 1: //Camaras
                     enviarDatosTablaCamaras();
-                    //JOptionPane.showMessageDialog(frmCBD, camaraDAO.eliminar());
+                    JOptionPane.showMessageDialog(frmCBD, camaraDAO.eliminar());
+                    borrarFila(frmCBD.getTblCamaras());
                     break;
                 case 2: //Clientes
                     break;
