@@ -6,6 +6,7 @@ import java.sql.SQLException;
 
 /**
  * ConexionBD es una clase que se conecta a una base de datos MySQL.
+ * @author Multi
  */
 public class ConexionBD {
 

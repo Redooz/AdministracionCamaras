@@ -3,8 +3,6 @@ package control;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -26,23 +24,67 @@ import vista.frmConsultar;
 import vista.frmConsultarBD;
 import vista.frmRegistrar;
 
-/*
-* @author Nicolas Olmos y Daniel Garcia
- */
+/** La clase controlador es la encargada de realizar el proceso de manejar las clases del modelo y de la vista, 
+ * implementa 2 interfaces ActionListener (Para escuchar los eventos que lanzan los usuarios) y 
+ * Runnable (Para hacer el flujo de multiples hilos y haci optimizar los tiempos de ejecucion y un poco de "Asincronia")
+* @author Nicolas Olmos
+* @author Daniel Garcia 
+*/ 
 public class Controlador implements ActionListener, Runnable{
 
+    /**
+     * Atributo de la clase ArrayList que maneja el atributo Factura
+     */
     public ArrayListFactura objLF;
+
+    /** 
+     * Atributo de la clase Escritorio el cual se encarga de manejar esta parte de la vista
+     */
     public Escritorio frmE;
+
+    /**
+     * Atributo de la clase frmConsultar el cual se encarga de manejar la parte de visualizar la informacion de los archivos de la vista
+     */
     public frmConsultar frmC;
+
+    /**
+     * Atributo de la clase frmRegistrar el cual se encarga de manejar la parte de registrar la informacion de la vista
+     */
     public frmRegistrar frmR;
+
+    /**
+     * Atributo de la clase frmConsultarBD el cual se encarga de manejar la parte de visualizar la informacion de la base de datos de la vista
+     */
     public frmConsultarBD frmCBD; 
+
+    /**
+     * Atributo de la clase FacturaDAO la cual se encarga de realizar las operaciones basicas CRUD, con relacion a las facturas
+     */
     public FacturaDAO facturaDAO;
+
+    /**
+     * Atributo de la clase CamaraDAO la cual se encarga de realizar las operaciones basicas CRUD, con relacion a las Camaras
+     */
     public CamaraDAO camaraDAO;
+
+    /**
+     * Atributo de la clase ClienteDAO la cual se encarga de realizar las operaciones basicas CRUD, con relacion a los clientes
+     */
     public ClienteDAO clienteDAO;
+
+    /**
+     * Atributo de la clase Hora la cual se encarga de el flujo de la Hora (VEROLMOS)
+     */
     public Hora objH;
+
+    /**
+     * Atributo de la clase Thread para manejar los hilos (VEROLMOS)
+     */
     public Thread hilo;
     
-    
+    /**
+     * Constructor que inicializa los atributos de la clase Controlador, hilo se inicializa enviandole el parametro this, para apuntar a la la clase actual (VEROLMOS)
+     */
     public Controlador() {
         this.objLF = new ArrayListFactura();
         this.frmE = new Escritorio();
@@ -56,6 +98,12 @@ public class Controlador implements ActionListener, Runnable{
         this.hilo = new Thread(this);
     }
 
+    /**
+     * Metodo que inicaliza el programa
+     * Activando ActionListener
+     * Enviando el titulo al la ventana de escritorios
+     * Y inicializando el hilo
+     */
     public void iniciar() {
         frmE.setTitle("Proyecto Cámaras :)");
         //Listerners 
@@ -76,6 +124,9 @@ public class Controlador implements ActionListener, Runnable{
         hilo.start();
     }
 
+    /**
+     * Metodo sobreescrito que maneja la logica del reloj 
+     */
     @Override
 public void run() {
         while (true) {
@@ -100,6 +151,10 @@ public void run() {
         }
     }
     
+    /**
+     *
+     * @param e
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource().equals(frmE.getMnuRegistrar()) || e.getSource().equals(frmE.getTbRegistrar())) { //Frame Registrar
@@ -293,6 +348,9 @@ public void run() {
         }
     }
 
+    /**
+     *
+     */
     public void agregarTabla() {
         DefaultTableModel plantilla = (DefaultTableModel) frmC.getTblLista().getModel();
 
@@ -316,6 +374,9 @@ public void run() {
         }
     }
 
+    /**
+     *
+     */
     public void agregarDatosDesdeArchivo() {
         try {
             Conexion objCon = new Conexion();
@@ -341,6 +402,9 @@ public void run() {
         }
     }
     
+    /**
+     *
+     */
     public void calcularTotalFacturasBD(){
         JTable tabla = frmCBD.getTblLista();
         int columnaTotales = 13;
@@ -354,6 +418,9 @@ public void run() {
         frmCBD.getLblTotal().setText(total.toString());
     }
     
+    /**
+     *
+     */
     public void enviarDatosTablaCamaras(){
         JTable tabla = frmCBD.getTblCamaras();
         int fila = tabla.getSelectedRow();
@@ -381,6 +448,9 @@ public void run() {
         
     }
     
+    /**
+     *
+     */
     public void enviarDatosTablaClientes(){
         JTable tabla = frmCBD.getTblClientes();
         int fila = tabla.getSelectedRow();
