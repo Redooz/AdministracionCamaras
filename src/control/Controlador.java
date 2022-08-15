@@ -151,10 +151,15 @@ public void run() {
                 Conexion objCon = new Conexion();
                 
                 objF.setCodigo(frmR.getTxtFactura().getText());
-                
-                String[] fecha = frmR.getTxtFecha().getText().split("/");
-                objF.setObjFCom(new Fecha(Integer.parseInt(fecha[0]), Integer.parseInt(fecha[1]), Integer.parseInt(fecha[2])));
-                
+                //Date excepcion
+                String[] fechaError = frmR.getTxtFecha().getText().split("/");
+                if (fechaError.length > 1) {
+                    ExcepcionPersonalizada fechaErrorFormat = new ExcepcionPersonalizada(301);
+                    JOptionPane.showMessageDialog(frmR, "Error: "+ fechaErrorFormat);    
+                }else{
+                    String[] fecha = frmR.getTxtFecha().getText().split("-");
+                    objF.setObjFCom(new Fecha(Integer.parseInt(fecha[0]), Integer.parseInt(fecha[1]), Integer.parseInt(fecha[2])));
+                }               
                 objCli.setCedula(frmR.getTxtCedula().getText());
                 objCli.setNom(frmR.getTxtNombre().getText());
                 objCli.setTel(frmR.getTxtTel().getText());

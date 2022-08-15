@@ -18,13 +18,13 @@ import java.util.Date;
 public class Fecha {
     private int dia ,mes,anio,diaSemana;
     
-     public Fecha(int dia, int mes, int anio) {
+     public Fecha(int anio, int mes, int dia) {
         this.dia = dia;
         this.mes = mes;
         this.anio = anio;
     }
 
-    public Fecha(int dia, int mes, int anio, int diaSemana) {
+    public Fecha(int anio, int mes, int dia, int diaSemana) {
         this.dia = dia;
         this.mes = mes;
         this.anio = anio;
@@ -134,7 +134,7 @@ public class Fecha {
     
     @Override
         public String toString() {
-        return dia + "/" + mes + "/" + anio;
+        return anio + "-" + mes + "-" + dia;
     }   
     
 }
