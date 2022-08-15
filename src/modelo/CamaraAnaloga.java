@@ -55,12 +55,17 @@ public class CamaraAnaloga extends Camara{
      * @param rollo
      * @throws modelo.ExcepcionPersonalizada
      */
-    //Add rollo excepcion 201 
     public void setRollo(String rollo) throws ExcepcionPersonalizada{
         if (rollo.equals("")) {
             throw new ExcepcionPersonalizada(101);
-        }else{
+        }else if(rollo.equals("B/N")){
             this.rollo = rollo;
+        }else if(rollo.equals("sepia")){
+            this.rollo = rollo;
+        }else if(rollo.equals("color")){
+            this.rollo = rollo;
+        }else{
+            throw new ExcepcionPersonalizada(201);
         }
     }
 
