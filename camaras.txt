@@ -2,3 +2,6 @@
 2;2;Juan;312;2;Canon;312;2000.0;B/N;Optico;--;--;2000.0
 3;1083;Karen;393;280;Sony;125mm;5000.0;--;--;64gb;10";4750.0
 350;1007476109;Daniel;3193744861;250;Lumix;300mm;50000.0;B/N;Optico;--;--;50000.0
+99;88;testExcepcionRollo;3193744861;99;sony;optico;25000.0;B/N;reflex;--;--;25000.0
+88;88;testExcepcionRollo;3193744861;99;sony;optico;25000.0;B/N;reflex;--;--;25000.0
+999;999;testExcepcionRollo;3193744861;999;sony;optico;25000.0;B/N;reflex;--;--;25000.0

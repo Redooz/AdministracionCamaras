@@ -1,5 +1,8 @@
 package modelo;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 /**
  * Clase abstracta que representa camara, tiene como atributos 
  * id (String), marca (String), lente (String) y precio (Double)
@@ -90,13 +93,15 @@ public abstract class Camara {
     /**
      * Setter que modifica el valor de marca
      * @param marca
-     * @throws modelo.ExcepcionPersonalizada
+     * @throws modelo.ExcepcionPersonalizada 101 102
      */
-    
-    //Add no numeric exception
     public void setMarca(String marca) throws ExcepcionPersonalizada{
+        Pattern pat = Pattern.compile("[0-9]");
+        Matcher mat = pat.matcher(marca);
         if (marca.equals("") ) {
             throw new ExcepcionPersonalizada(101);
+        }else if(mat.find()){
+            throw new ExcepcionPersonalizada(102,marca);
         }else{        
             this.marca = marca;
         }
@@ -113,6 +118,7 @@ public abstract class Camara {
     /**
      * Setter que modifica el valor de lente
      * @param lente
+     * @throws modelo.ExcepcionPersonalizada
      */
     public void setLente(String lente) throws ExcepcionPersonalizada{
         if (lente.equals("") ) {
