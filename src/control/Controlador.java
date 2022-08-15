@@ -3,6 +3,8 @@ package control;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -14,6 +16,7 @@ import modelo.CamaraDigital;
 import modelo.Cliente;
 import modelo.ClienteDAO;
 import modelo.Conexion;
+import modelo.ExcepcionPersonalizada;
 import modelo.Factura;
 import modelo.FacturaDAO;
 import modelo.Fecha;
@@ -209,7 +212,11 @@ public void run() {
             } catch (IOException ex) {
                 JOptionPane.showMessageDialog(frmE, "Error al escribir el archivo: " + ex.getMessage());
             } catch (NumberFormatException ex) {
+                System.out.println("Error numero");
                 JOptionPane.showMessageDialog(frmE, "Error : " + ex.getMessage());
+            } catch (ExcepcionPersonalizada error) {
+                System.out.println("Error mio");
+                JOptionPane.showMessageDialog(frmE, error.toString());
             }
         }
 

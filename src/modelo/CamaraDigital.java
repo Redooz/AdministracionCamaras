@@ -20,6 +20,12 @@ public class CamaraDigital extends Camara{
 
     /**
      * Un constructor que recibe los atributos de la clase y los atributos de la superclase.
+     * @param memoria
+     * @param pantalla
+     * @param id
+     * @param marca
+     * @param lente
+     * @param precio
      */
     public CamaraDigital(String memoria, String pantalla, String id, String marca, String lente, double precio) {
         super(id, marca, lente, precio);
@@ -50,9 +56,14 @@ public class CamaraDigital extends Camara{
      * Esta función establece el valor de la variable memoria al valor del parámetro memoria
      *
      * @param memoria La memoria del dispositivo.
+     * @throws modelo.ExcepcionPersonalizada
      */
-    public void setMemoria(String memoria) {
-        this.memoria = memoria;
+    public void setMemoria(String memoria) throws ExcepcionPersonalizada{
+        if (memoria.equals("")) {
+            throw new ExcepcionPersonalizada(101);
+        }else{
+            this.memoria = memoria;
+        }
     }
 
     /**
@@ -68,9 +79,14 @@ public class CamaraDigital extends Camara{
      * Esta función establece el valor de la variable pantalla al valor del parámetro pantalla
      *
      * @param pantalla El nombre de la pantalla que desea mostrar.
+     * @throws modelo.ExcepcionPersonalizada
      */
-    public void setPantalla(String pantalla) {
-        this.pantalla = pantalla;
+    public void setPantalla(String pantalla) throws ExcepcionPersonalizada{
+        if (pantalla.equals("")) {
+            throw new ExcepcionPersonalizada(101);
+        }else{
+            this.pantalla = pantalla;
+        }
     }
 
     /**

@@ -53,9 +53,14 @@ public class CamaraAnaloga extends Camara{
     /**
      * Setter que modifica el valor de rollo
      * @param rollo
+     * @throws modelo.ExcepcionPersonalizada
      */
-    public void setRollo(String rollo) {
-        this.rollo = rollo;
+    public void setRollo(String rollo) throws ExcepcionPersonalizada{
+        if (rollo.equals("")) {
+            throw new ExcepcionPersonalizada(101);
+        }else{
+            this.rollo = rollo;
+        }
     }
 
     /**
@@ -69,9 +74,14 @@ public class CamaraAnaloga extends Camara{
     /**
      * Setter que modifica el valor de visor
      * @param visor
+     * @throws modelo.ExcepcionPersonalizada
      */
-    public void setVisor(String visor) {
-        this.visor = visor;
+    public void setVisor(String visor) throws ExcepcionPersonalizada {
+        if (visor.equals("")) {
+            throw new ExcepcionPersonalizada(101);
+        }else{
+            this.visor = visor;
+        }
     }
 
     @Override

@@ -46,9 +46,14 @@ public class Cliente {
      * Esta función establece el valor de la variable cedula al valor del parámetro cedula
      *
      * @param cedula El número de identificación de la persona.
+     * @throws modelo.ExcepcionPersonalizada
      */
-    public void setCedula(String cedula) {
-        this.cedula = cedula;
+    public void setCedula(String cedula) throws ExcepcionPersonalizada {
+        if (cedula.equals("")) {
+            throw new ExcepcionPersonalizada(101);
+        }else{
+            this.cedula = cedula;
+        }
     }
 
     /**
@@ -64,9 +69,14 @@ public class Cliente {
      * Esta función establece el valor de la variable nom al valor del parámetro nom
      *
      * @param nom El nombre del parámetro.
+     * @throws modelo.ExcepcionPersonalizada
      */
-    public void setNom(String nom) {
-        this.nom = nom;
+    public void setNom(String nom) throws ExcepcionPersonalizada{
+        if (nom.equals("")) {
+            throw new ExcepcionPersonalizada(101);
+        }else{
+            this.nom = nom;
+        }
     }
 
     /**
@@ -82,9 +92,14 @@ public class Cliente {
      * > Esta función establece el atributo tel de la clase al valor del parámetro tel
      *
      * @param tel El número de teléfono del usuario.
+     * @throws modelo.ExcepcionPersonalizada
      */
-    public void setTel(String tel) {
-        this.tel = tel;
+    public void setTel(String tel) throws ExcepcionPersonalizada{
+        if (tel.equals("")) {
+            throw new ExcepcionPersonalizada(101);
+        }else{
+            this.tel = tel;
+        }
     }
 
     @Override

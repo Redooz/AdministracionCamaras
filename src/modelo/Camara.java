@@ -69,9 +69,14 @@ public abstract class Camara {
     /**
      * Setter que modifica el valor de ID
      * @param id
+     * @throws modelo.ExcepcionPersonalizada 101
      */
-    public void setId(String id) {
-        this.id = id;
+    public void setId(String id) throws ExcepcionPersonalizada {
+        if (id.equals("") ) {
+            throw new ExcepcionPersonalizada(101);
+        }else{
+            this.id = id;
+        }
     }
 
     /**
@@ -85,9 +90,14 @@ public abstract class Camara {
     /**
      * Setter que modifica el valor de marca
      * @param marca
+     * @throws modelo.ExcepcionPersonalizada
      */
-    public void setMarca(String marca) {
-        this.marca = marca;
+    public void setMarca(String marca) throws ExcepcionPersonalizada{
+        if (marca.equals("") ) {
+            throw new ExcepcionPersonalizada(101);
+        }else{        
+            this.marca = marca;
+        }
     }
 
     /**
@@ -102,8 +112,12 @@ public abstract class Camara {
      * Setter que modifica el valor de lente
      * @param lente
      */
-    public void setLente(String lente) {
-        this.lente = lente;
+    public void setLente(String lente) throws ExcepcionPersonalizada{
+        if (lente.equals("") ) {
+            throw new ExcepcionPersonalizada(101);
+        }else{        
+            this.lente = lente;
+        }
     }
 
     /**
@@ -118,8 +132,8 @@ public abstract class Camara {
      * Setter que modifica el valor de precio
      * @param precio
      */
-    public void setPrecio(double precio) {
-        this.precio = precio;
+    public void setPrecio(double precio){       
+            this.precio = precio;
     }
 
     @Override
