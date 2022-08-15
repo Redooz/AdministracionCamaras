@@ -92,6 +92,8 @@ public abstract class Camara {
      * @param marca
      * @throws modelo.ExcepcionPersonalizada
      */
+    
+    //Add no numeric exception
     public void setMarca(String marca) throws ExcepcionPersonalizada{
         if (marca.equals("") ) {
             throw new ExcepcionPersonalizada(101);

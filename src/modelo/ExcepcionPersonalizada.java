@@ -28,7 +28,7 @@ public class ExcepcionPersonalizada extends Exception{
                 msj="En el campo de fecha se debe poner el siguiente formato 'año-mes-dia'...";
                 break;
             default:
-                msj = "Error no detectado...";
+                msj = "Error no identificado...";
                 break;
         }
     }

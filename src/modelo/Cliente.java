@@ -71,6 +71,7 @@ public class Cliente {
      * @param nom El nombre del parámetro.
      * @throws modelo.ExcepcionPersonalizada
      */
+    //Add no numeric exception
     public void setNom(String nom) throws ExcepcionPersonalizada{
         if (nom.equals("")) {
             throw new ExcepcionPersonalizada(101);
