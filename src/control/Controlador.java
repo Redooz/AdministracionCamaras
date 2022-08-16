@@ -125,7 +125,7 @@ public class Controlador implements ActionListener, Runnable{
     }
 
     /**
-     * Metodo sobreescrito que maneja la logica del reloj 
+     * Metodo sobreescrito que maneja la logica del reloj con el uso de Hilos 
      */
     @Override
 public void run() {
@@ -152,11 +152,12 @@ public void run() {
     }
     
     /**
-     *
+     * Metodo sobreescrito de la interface ActionListener, el cual tiene la logica que será operada cada vez que el usuario realice algun tipo de accion en la aplicacion.
      * @param e
      */
     @Override
     public void actionPerformed(ActionEvent e) {
+        // Condicional que inicializa los listeners del internalFrame frmRegistrar
         if (e.getSource().equals(frmE.getMnuRegistrar()) || e.getSource().equals(frmE.getTbRegistrar())) { //Frame Registrar
             frmR = new frmRegistrar();
             //Combo box
@@ -172,7 +173,7 @@ public void run() {
 
             frmR.setVisible(true);
         }
-
+        //Concicional que inicializa el frmConsultar de archivo
         if (e.getSource().equals(frmE.getMnuConsultar()) || e.getSource().equals(frmE.getTbConsultar())) { //Frame Consultar
             frmC = new frmConsultar();
             
@@ -182,12 +183,12 @@ public void run() {
 
             frmC.setVisible(true);
         }
-
+        //Condicional que implementa la logica de generar los PDF de manera automatica
         if (e.getSource().equals(frmE.getTbPDF())) { //Generar PDF
             ArchPdf objPDF = new ArchPdf();
             objPDF.generar("Camaras", objLF.toString());
         }
-
+        //Condicional que implementa la logica para el boton salir, creado por nosotros.
         if (e.getSource().equals(frmE.getMnuSalir()) || e.getSource().equals(frmE.getTbSalir())) { //Salir
             int resp = JOptionPane.showConfirmDialog(frmE,
                     "Desea terminar la ejecucion?", "Salir",
@@ -198,7 +199,7 @@ public void run() {
                 hilo.stop();
             }
         }
-
+        //Condicional que implementa la logica de registrar una compra de camaras
         if (e.getSource().equals(frmR.getBtnRegistrar())) { //Boton registrar
             try {
                 Factura objF = new Factura();
@@ -279,7 +280,7 @@ public void run() {
                 JOptionPane.showMessageDialog(frmE, error.toString());
             }
         }
-
+        // Condicional que activa o desactiva el panel necesario, dependiendo de si se escoge ingresar una camara digital o analoga 
         if (e.getSource().equals(frmR.getCmbRegistrar()) && frmR != null) { //Hacer visible o no paneles
             switch (frmR.getCmbRegistrar().getSelectedIndex()) {
                 case 0: // Digital selected
@@ -293,7 +294,7 @@ public void run() {
 
             }
         }
-        
+        // Condicional que maneja el frmConsultarBD el cual es la misma tabla de consultar pero referente a los DAOs y por ende a la base de datos
         if(e.getSource().equals(frmE.getTbConsultarBD())){ //Consultar bd
             frmCBD = new frmConsultarBD();
             
@@ -311,7 +312,7 @@ public void run() {
             
             frmCBD.setVisible(true);
         }
-        
+        // Condicional que evalua si se le da al boton actualizar BD, y llama a las funciones necesarias para actualizar la informacion
         if(e.getSource().equals(frmCBD.getBtnActualizar())){ //Boton actualizar
             switch(frmCBD.getPanelTabs().getSelectedIndex()){ 
                 case 0: //Facturas
@@ -328,7 +329,7 @@ public void run() {
             }
         }
      
-        //TO DO
+        // Condicional que evalua si se le da al boton eliminar BD, y llama a las funciones necesarias para eliminar la informacion
         if(e.getSource().equals(frmCBD.getBtnEliminar())){ //Boton eliminar
             switch(frmCBD.getPanelTabs().getSelectedIndex()){ 
                 case 0: //Facturas
@@ -349,7 +350,7 @@ public void run() {
     }
 
     /**
-     *
+     * Mettodo que agrega los registros de el arrayFacturas a la tabla
      */
     public void agregarTabla() {
         DefaultTableModel plantilla = (DefaultTableModel) frmC.getTblLista().getModel();
@@ -375,7 +376,7 @@ public void run() {
     }
 
     /**
-     *
+     * Metodo que trae los datos del archivo, los separa y los muestra en la tabla
      */
     public void agregarDatosDesdeArchivo() {
         try {
@@ -403,7 +404,7 @@ public void run() {
     }
     
     /**
-     *
+     * Metodo para calcular el valor total de las camaras compradas 
      */
     public void calcularTotalFacturasBD(){
         JTable tabla = frmCBD.getTblLista();
@@ -419,7 +420,7 @@ public void run() {
     }
     
     /**
-     *
+     * Metodo para enviar los datos de la a la tabla CAMARAS de la base de datos
      */
     public void enviarDatosTablaCamaras(){
         JTable tabla = frmCBD.getTblCamaras();
@@ -449,7 +450,7 @@ public void run() {
     }
     
     /**
-     *
+     * Metodo para enviar los datos a la tabla CLIENTES de la base de datos
      */
     public void enviarDatosTablaClientes(){
         JTable tabla = frmCBD.getTblClientes();

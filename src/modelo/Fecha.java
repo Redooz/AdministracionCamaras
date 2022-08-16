@@ -108,7 +108,7 @@ public class Fecha {
     /**
      * Esta función establece el valor de la variable anio al valor del parámetro anio
      *
-     * @param anio El año del coche.
+     * @param anio El año de la fecha.
      */
     public void setAnio(int anio) {
         this.anio = anio;
