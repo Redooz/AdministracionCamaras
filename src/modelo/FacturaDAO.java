@@ -45,7 +45,7 @@ public class FacturaDAO {
             con.conectar();
             Statement consulta = con.getConexion().createStatement();
             ResultSet datos = consulta.executeQuery("SELECT facturas.codigo,facturas.fecha,clientes.id,clientes.nombre,clientes.telefono,camaras.id,camaras.marca,camaras.lente,camaras.precio,camaras.rollo,camaras.visor,camaras.memoria,camaras.pantalla,facturas.precio_total FROM facturas NATURAL JOIN clientes,camaras \n" +
-"WHERE facturas.id_cliente = clientes.id and facturas.id_camara = camaras.id;");
+            "WHERE facturas.id_cliente = clientes.id and facturas.id_camara = camaras.id;");
             ResultSetMetaData campos = datos.getMetaData();
             
             for (int i = 1; i <= campos.getColumnCount(); i++) {

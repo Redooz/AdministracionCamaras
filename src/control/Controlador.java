@@ -8,6 +8,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import modelo.ArchPdf;
 import modelo.ArrayListFactura;
+import modelo.Camara;
 import modelo.CamaraAnaloga;
 import modelo.CamaraDAO;
 import modelo.CamaraDigital;
@@ -73,17 +74,17 @@ public class Controlador implements ActionListener, Runnable{
     public ClienteDAO clienteDAO;
 
     /**
-     * Atributo de la clase Hora la cual se encarga de el flujo de la Hora (VEROLMOS)
+     * Atributo de la clase Hora la cual se encarga de el flujo de la Hora 
      */
     public Hora objH;
 
     /**
-     * Atributo de la clase Thread para manejar los hilos (VEROLMOS)
+     * Atributo de la clase Thread para manejar los hilos 
      */
     public Thread hilo;
     
     /**
-     * Constructor que inicializa los atributos de la clase Controlador, hilo se inicializa enviandole el parametro this, para apuntar a la la clase actual (VEROLMOS)
+     * Constructor que inicializa los atributos de la clase Controlador, hilo se inicializa enviandole el parametro this, para apuntar a la la clase actual 
      */
     public Controlador() {
         this.objLF = new ArrayListFactura();
@@ -316,7 +317,9 @@ public void run() {
         if(e.getSource().equals(frmCBD.getBtnActualizar())){ //Boton actualizar
             switch(frmCBD.getPanelTabs().getSelectedIndex()){ 
                 case 0: //Facturas
-                    
+                    JOptionPane.showMessageDialog(frmCBD, "Recuerde que solo se puede actualizar la fecha");
+                    enviarDatosTablaFactura();
+                    JOptionPane.showMessageDialog(frmCBD, facturaDAO.actualizar());
                     break;
                 case 1: //Camaras
                     enviarDatosTablaCamaras();
@@ -331,9 +334,14 @@ public void run() {
      
         // Condicional que evalua si se le da al boton eliminar BD, y llama a las funciones necesarias para eliminar la informacion
         if(e.getSource().equals(frmCBD.getBtnEliminar())){ //Boton eliminar
+            System.out.println("Click en eliminar");
             switch(frmCBD.getPanelTabs().getSelectedIndex()){ 
                 case 0: //Facturas
-                    
+                    System.out.println("Seleccionado factura");
+                    enviarDatosTablaFactura();
+                    System.out.println("Selecionado factura 2");
+                    JOptionPane.showMessageDialog(frmCBD, facturaDAO.eliminar());
+                    borrarFila(frmCBD.getTblLista());
                     break;
                 case 1: //Camaras
                     enviarDatosTablaCamaras();
@@ -420,7 +428,7 @@ public void run() {
     }
     
     /**
-     * Metodo para enviar los datos de la a la tabla CAMARAS de la base de datos
+     * Metodo para enviar los datos de la JTable a la tabla CAMARAS de la base de datos
      */
     public void enviarDatosTablaCamaras(){
         JTable tabla = frmCBD.getTblCamaras();
@@ -447,6 +455,59 @@ public void run() {
             camaraDAO.setObjC(objCA);
         }
         
+    }
+    /**
+     * Metodo para enviar los datos de la JTable a la tabla Facturas de la base de datos
+     */
+    public void enviarDatosTablaFactura(){
+        System.out.println("Eviar datos a tabla");
+        JTable tabla = frmCBD.getTblLista();
+        int fila = tabla.getSelectedRow();
+        //Se crea un cliente con la informacion mostrada en la tabla
+        Cliente objClienteLocal = new Cliente(tabla.getValueAt(fila, 2).toString(), //cedula cliente
+                                            tabla.getValueAt(fila, 3).toString(), //Nombre cliente
+                                            tabla.getValueAt(fila, 4).toString() //Telefono del cliente
+                                        );
+        
+        String arrayFechaLocal[] = tabla.getValueAt(fila, 1).toString().split("-");
+        
+        Fecha objFechaLocal = new Fecha(Integer.parseInt(arrayFechaLocal[0]), //Año
+                                        Integer.parseInt(arrayFechaLocal[1]), //Mes
+                                        Integer.parseInt(arrayFechaLocal[2]) //Dia
+                                    );
+        //Se identifica si la camara es analoga o es digital
+        if (tabla.getValueAt(fila, 9) == null && tabla.getValueAt(fila, 10) == null) { //Como NO tiene contenido en rollo y visor -> la CAMARA es DIGITAL
+            CamaraDigital objCamaraDigitalLocal = new CamaraDigital(
+                                                    tabla.getValueAt(fila, 11).toString(), //Memoria de la camara digital
+                                                    tabla.getValueAt(fila, 12).toString(), //Pantalla de la camara digital
+                                                    tabla.getValueAt(fila, 5).toString(), //ID de la camara digital
+                                                    tabla.getValueAt(fila, 6).toString(), //Marca de la camara digital
+                                                    tabla.getValueAt(fila, 7).toString(), //Lente de la camara digital
+                                                    Double.parseDouble(tabla.getValueAt(fila, 8).toString())); //Precio de la camara digital
+            
+            Factura objFacturaLocal = new Factura(
+                                            tabla.getValueAt(fila, 0).toString(), // Codigo de la factura
+                                            objClienteLocal, // Objeto Cliente con info de la tabla
+                                            objCamaraDigitalLocal, // Camara digital con info de la tabla
+                                            objFechaLocal // Fecha con info de la tabla
+                                             );
+            facturaDAO.setObjF(objFacturaLocal);
+        }else if(tabla.getValueAt(fila, 11) == null && tabla.getValueAt(fila, 12) == null){// Como NO tiene contenido en memoria y pantalla -> la CAMARA es ANALOGA
+            CamaraAnaloga objCamaraAnalogaLocal = new CamaraAnaloga(
+                                                    tabla.getValueAt(fila, 9).toString(),//Rollo de la camara analoga
+                                                    tabla.getValueAt(fila, 10).toString(),//Visor de la camara analoga
+                                                    tabla.getValueAt(fila, 5).toString(),//ID de la camara analoga
+                                                    tabla.getValueAt(fila, 6).toString(),//Marca de la camara analoga
+                                                    tabla.getValueAt(fila, 7).toString(),//Lente de la camara analoga
+                                                    Double.parseDouble(tabla.getValueAt(fila, 8).toString()));//Precio de la camara analoga                                         
+            Factura objFacturaLocal = new Factura(
+                                            tabla.getValueAt(fila, 0).toString(), // Codigo de la factura
+                                            objClienteLocal, // Objeto Cliente con info de la tabla
+                                            objCamaraAnalogaLocal, // Camara analoga con info de la tabla
+                                            objFechaLocal // Fecha con info de la tabla
+                                             );
+            facturaDAO.setObjF(objFacturaLocal);
+        }
     }
     
     /**
