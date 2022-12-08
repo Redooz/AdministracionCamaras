@@ -4,6 +4,9 @@ import java.util.Calendar;
 
 /**
  * La clase Hora representa la hora local del sistema
+ * @author multi
+ * @author Daniel Garcia
+ * @author Nicolas Olmos
  */
 public class Hora {
     private int hh,mm,ss;

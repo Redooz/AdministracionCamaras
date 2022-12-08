@@ -31,6 +31,7 @@ public class Escritorio extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JSeparator();
         desktopPane = new javax.swing.JDesktopPane();
         jToolBar1 = new javax.swing.JToolBar();
+        jPanel1 = new javax.swing.JPanel();
         lblHora = new javax.swing.JLabel();
         toolBar = new javax.swing.JToolBar();
         tbRegistrar = new javax.swing.JButton();
@@ -50,14 +51,50 @@ public class Escritorio extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jToolBar1.setRollover(true);
+        desktopPane.setBackground(new java.awt.Color(0, 0, 0));
 
+        jToolBar1.setBackground(new java.awt.Color(0, 0, 0));
+        jToolBar1.setRollover(true);
+        jToolBar1.setAlignmentY(0.9F);
+        jToolBar1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jToolBar1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jToolBar1.setPreferredSize(new java.awt.Dimension(460, 200));
+
+        jPanel1.setBackground(new java.awt.Color(102, 51, 255));
+
+        lblHora.setBackground(new java.awt.Color(0, 0, 0));
+        lblHora.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        lblHora.setForeground(new java.awt.Color(255, 255, 255));
         lblHora.setText("00:00:00");
-        jToolBar1.add(lblHora);
+        lblHora.setToolTipText("");
+        lblHora.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        lblHora.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        lblHora.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap(1092, Short.MAX_VALUE)
+                .addComponent(lblHora)
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 4, Short.MAX_VALUE)
+                .addComponent(lblHora))
+        );
+
+        lblHora.getAccessibleContext().setAccessibleDescription("");
+
+        jToolBar1.add(jPanel1);
 
         desktopPane.add(jToolBar1);
         jToolBar1.setBounds(0, 670, 1190, 40);
 
+        toolBar.setBackground(new java.awt.Color(102, 51, 255));
         toolBar.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         toolBar.setRollover(true);
 
@@ -70,7 +107,7 @@ public class Escritorio extends javax.swing.JFrame {
         toolBar.add(jSeparator5);
 
         tbConsultar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/analoga-camara.png"))); // NOI18N
-        tbConsultar.setText("Consultar");
+        tbConsultar.setText("Consultar Archivo");
         tbConsultar.setFocusable(false);
         tbConsultar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         tbConsultar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -81,6 +118,11 @@ public class Escritorio extends javax.swing.JFrame {
         tbConsultarBD.setFocusable(false);
         tbConsultarBD.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         tbConsultarBD.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        tbConsultarBD.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tbConsultarBDActionPerformed(evt);
+            }
+        });
         toolBar.add(tbConsultarBD);
         toolBar.add(jSeparator4);
 
@@ -93,6 +135,7 @@ public class Escritorio extends javax.swing.JFrame {
         toolBar.add(jSeparator2);
 
         tbSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/btn-salir.png"))); // NOI18N
+        tbSalir.setText("Salir");
         tbSalir.setFocusable(false);
         tbSalir.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         tbSalir.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -148,10 +191,15 @@ public class Escritorio extends javax.swing.JFrame {
 
     private void mnuSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuSalirActionPerformed
     }//GEN-LAST:event_mnuSalirActionPerformed
+
+    private void tbConsultarBDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tbConsultarBDActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tbConsultarBDActionPerformed
    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane desktopPane;
     private javax.swing.JMenu fileMenu;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JToolBar.Separator jSeparator2;
     private javax.swing.JPopupMenu.Separator jSeparator3;

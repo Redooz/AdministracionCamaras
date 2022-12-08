@@ -75,13 +75,13 @@ public class frmRegistrar extends javax.swing.JInternalFrame {
 
         jLabel4.setText("Telefono:");
 
-        jLabel5.setText("Precio");
+        jLabel5.setText("Precio:");
 
         jpnAnaloga.setPreferredSize(new java.awt.Dimension(300, 100));
 
-        jLabel7.setText("Rollo");
+        jLabel7.setText("Rollo:");
 
-        jLabel8.setText("Visor");
+        jLabel8.setText("Visor:");
 
         javax.swing.GroupLayout jpnAnalogaLayout = new javax.swing.GroupLayout(jpnAnaloga);
         jpnAnaloga.setLayout(jpnAnalogaLayout);
@@ -113,9 +113,9 @@ public class frmRegistrar extends javax.swing.JInternalFrame {
 
         jpnDigital.setPreferredSize(new java.awt.Dimension(300, 100));
 
-        jLabel9.setText("Memoria");
+        jLabel9.setText("Memoria:");
 
-        jLabel10.setText("Pantalla");
+        jLabel10.setText("Pantalla:");
 
         javax.swing.GroupLayout jpnDigitalLayout = new javax.swing.GroupLayout(jpnDigital);
         jpnDigital.setLayout(jpnDigitalLayout);
@@ -135,7 +135,7 @@ public class frmRegistrar extends javax.swing.JInternalFrame {
         jpnDigitalLayout.setVerticalGroup(
             jpnDigitalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpnDigitalLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(7, Short.MAX_VALUE)
                 .addGroup(jpnDigitalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
                     .addComponent(txtMem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -154,15 +154,15 @@ public class frmRegistrar extends javax.swing.JInternalFrame {
             }
         });
 
-        jLabel6.setText("Código");
+        jLabel6.setText("Código Cámara:");
 
-        jLabel11.setText("Marca");
+        jLabel11.setText("Marca:");
 
-        jLabel12.setText("Lente");
+        jLabel12.setText("Lente:");
 
         jLabel13.setText("Cedula: ");
 
-        jLabel14.setText("Fecha Compra");
+        jLabel14.setText("Fecha Compra:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

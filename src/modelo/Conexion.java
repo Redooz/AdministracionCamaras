@@ -7,19 +7,34 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import javax.swing.JOptionPane;
 
+/**
+ * La clase conexion permite la lectura y escritura en un archivo.
+ * @author Nicolás Olmos
+ * @author Daniel Garcia
+ */
 public class Conexion {
     private BufferedReader bufEntrada;
     private FileReader flujoLee;
     private FileWriter flujoEscr;
     private PrintWriter bufSalida;
 
+    /**
+     * Es un constructor parametrico que instancia a Conexion con los siguientes parametros.
+     * @param bufEntrada
+     * @param flujoLee
+     * @param flujoEscr
+     * @param bufSalida
+     */
     public Conexion(BufferedReader bufEntrada, FileReader flujoLee, FileWriter flujoEscr, PrintWriter bufSalida) {
         this.bufEntrada = bufEntrada;
         this.flujoLee = flujoLee;
         this.flujoEscr = flujoEscr;
         this.bufSalida = bufSalida;
     }
-    
+
+    /**
+     * Es un constructor basico que instancia a Conexion con valores nulos.
+     */
     public Conexion() {
         this.bufEntrada = null;
         this.flujoLee = null;
@@ -27,6 +42,12 @@ public class Conexion {
         this.bufSalida = null;
     }
     
+    /**
+     * La función lee el archivo y devuelve los datos en un (String)
+     *
+     * @return El método está devolviendo una cadena.
+     * @throws IOException
+     */
     public String leerDatos() throws IOException{
         this.flujoLee= new FileReader("camaras.txt");
         bufEntrada= new BufferedReader(flujoLee);
@@ -43,6 +64,13 @@ public class Conexion {
         return datos;
     }
     
+    /**
+     * La función recibe un String, crea un nuevo FileWrite, crea un nuevo PrintWriter, imprime el String
+     * en el archivo y cierra el archivo.
+     *
+     * @param datos Los datos que se escribirán en el archivo.
+     * @throws IOException
+     */
     public void escribeDatos(String datos) throws IOException{
         flujoEscr= new FileWriter("camaras.txt", true);
         bufSalida= new PrintWriter(flujoEscr);
